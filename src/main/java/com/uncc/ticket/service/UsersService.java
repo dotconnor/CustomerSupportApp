@@ -8,24 +8,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsersService {
 
-    private UsersRepository usersRepository;
+  private UsersRepository usersRepository;
 
-    @Autowired
-    public UsersService(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
+  @Autowired
+  public UsersService(UsersRepository usersRepository) {
+    this.usersRepository = usersRepository;
 
-    }
+  }
 
-    public void registerUser(UsersEntity users) {
-        usersRepository.save(users);
-    }
+  public void registerUser(UsersEntity users) {
+    usersRepository.save(users);
+  }
 
-    public UsersEntity findById(Long id) {
-        return usersRepository.getOne(id);
-    }
+  public UsersEntity findById(Long id) {
+    return usersRepository.getOne(id);
+  }
 
-    public UsersEntity findByEmail(String email) {
-        return usersRepository.findByEmail(email);
-    }
+  public UsersEntity findByEmail(String email) {
+    return usersRepository.findByEmail(email);
+  }
 }
-

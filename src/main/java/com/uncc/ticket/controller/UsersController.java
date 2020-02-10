@@ -14,31 +14,31 @@ import javax.validation.Valid;
 @Controller
 public class UsersController {
 
-    private UsersService usersService;
+  private UsersService usersService;
 
-    @Autowired
-    public UsersController(UsersService usersService) {
-        this.usersService = usersService;
-    }
+  @Autowired
+  public UsersController(UsersService usersService) {
+    this.usersService = usersService;
+  }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login() {
-        return "users/login";
-    }
+  @RequestMapping(value = "/login", method = RequestMethod.GET)
+  public String login() {
+    return "users/login";
+  }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registerUser(Model model) {
-        model.addAttribute("user", new UsersEntity());
-        return "users/registerUser";
-    }
+  @RequestMapping(value = "/register", method = RequestMethod.GET)
+  public String registerUser(Model model) {
+    model.addAttribute("user", new UsersEntity());
+    return "users/registerUser";
+  }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String storeUser(@ModelAttribute(name = "user") @Valid UsersEntity user, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "users/registerUser";
-        }
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        usersService.registerUser(user);
-        return "redirect:";
+  @RequestMapping(value = "/register", method = RequestMethod.POST)
+  public String storeUser(@ModelAttribute(name = "user") @Valid UsersEntity user, BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+      return "users/registerUser";
     }
+    user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+    usersService.registerUser(user);
+    return "redirect:";
+  }
 }
